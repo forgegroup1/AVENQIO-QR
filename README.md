@@ -1,17 +1,23 @@
 # AVENQIO QR
 
-Free QR code generator for websites, Wi-Fi networks, text, email addresses, and phone numbers. Custom colors, center logo, and code styles. PNG, SVG, and clipboard export. Everything runs locally in the browser.
+Generatore gratuito di QR code per siti web, reti Wi-Fi, testo, email e numeri di telefono. Colori, logo al centro e stili diversi. Esportazione PNG, SVG e copia negli appunti. Tutto resta nel browser: nessun account, nessun backend.
 
 **Tools that move you forward.**
 
-## Develop
+Creato da **ForgeGroup × AVENQIO**.
+
+Il progetto è ancora in costruzione. Ci saranno aggiornamenti.
+
+Discord: https://discord.gg/XPvpVG38BD
+
+## Sviluppo
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Check
+## Verifica
 
 ```bash
 npm test

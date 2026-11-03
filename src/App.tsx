@@ -30,9 +30,18 @@ export default function App() {
         <QrStudio />
       </main>
 
-      <footer className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-mist sm:flex-row sm:items-center sm:justify-between">
-        <p>AVENQIO QR · Tools that move you forward</p>
-        <p>Free. No account. Generated in your browser.</p>
+      <footer className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-mist sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p>AVENQIO QR · Tools that move you forward</p>
+          <p className="mt-1">Created by ForgeGroup × AVENQIO. Still in progress — updates are on the way.</p>
+        </div>
+        <a
+          className="text-lilac underline-offset-4 hover:underline"
+          href="https://discord.gg/XPvpVG38BD"
+          rel="noreferrer"
+        >
+          Discord
+        </a>
       </footer>
     </div>
   );
