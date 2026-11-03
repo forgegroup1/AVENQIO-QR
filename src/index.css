@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #07060c;
+  --color-panel: #110e18;
+  --color-line: rgba(196, 181, 253, 0.16);
+  --color-mist: #b7adc9;
+  --color-paper: #f6f3ff;
+  --color-violet: #8b5cf6;
+  --color-lilac: #c4b5fd;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background: var(--color-ink);
+  color: #f6f3ff;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 45% at 8% -8%, rgba(139, 92, 246, 0.32), transparent 55%),
+    radial-gradient(ellipse 45% 35% at 100% 0%, rgba(167, 139, 250, 0.16), transparent 50%),
+    radial-gradient(ellipse 40% 30% at 80% 110%, rgba(91, 33, 182, 0.28), transparent 55%);
+  z-index: -1;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.45);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 2px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.rise {
+  animation: rise 0.6s ease both;
+}
+
+.rise-delay {
+  animation-delay: 0.08s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .rise-delay {
+    animation: none;
+  }
+}
+
+.qr-frame svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
