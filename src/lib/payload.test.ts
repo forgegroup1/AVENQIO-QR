@@ -45,6 +45,37 @@ describe("buildPayload", () => {
     expect(buildPayload("phone", content)).toBe("tel:+393331234567");
   });
 
+  it("builds a vcard, whatsapp link, map link, and calendar link", () => {
+    const content = emptyContent();
+    content.vcard = {
+      firstName: "Ada",
+      lastName: "Lovelace",
+      organization: "AVENQIO",
+      title: "Builder",
+      phone: "+39 333",
+      email: "ada@avenqio.com",
+      website: "avenqio.com",
+    };
+    expect(buildPayload("vcard", content)).toContain("FN:Ada Lovelace");
+    expect(buildPayload("vcard", content)).toContain("URL:https://avenqio.com");
+
+    content.whatsapp = { number: "+39 333 111", message: "Ciao" };
+    expect(buildPayload("whatsapp", content)).toBe("https://wa.me/39333111?text=Ciao");
+
+    content.location = { query: "", latitude: "45.46", longitude: "9.19" };
+    expect(buildPayload("location", content)).toContain("query=45.46%2C9.19");
+
+    content.event = {
+      title: "Demo",
+      start: "2026-11-04T18:30",
+      end: "",
+      location: "Milan",
+      details: "",
+    };
+    expect(buildPayload("event", content)).toContain("text=Demo");
+    expect(buildPayload("event", content)).toContain("dates=20261104T183000%2F20261104T193000");
+  });
+
   it("returns an empty string when required fields are blank", () => {
     const content = emptyContent();
     expect(buildPayload("url", content)).toBe("");
