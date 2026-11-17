@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: https://cdn.discordapp.com; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AvenqioPresence</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <p class="brand-name">Avenqio<span>Presence</span></p>
+          <p class="brand-sub">Windows companion</p>
+        </div>
+      </div>
+      <div class="pills">
+        <span class="pill" id="pill-rpc"><span class="dot"></span><span id="rpc-label">Discord</span></span>
+        <span class="pill" id="pill-sync"><span class="dot"></span><span id="sync-label">Sync</span></span>
+        <span class="version" id="version">v0.0.0</span>
+      </div>
+    </header>
+
+    <main>
+      <section id="unlinked" class="card pairing" hidden>
+        <h1>Link this PC</h1>
+        <p class="muted">
+          Generate a pairing code in the dashboard under <strong>Settings → Connected devices</strong>, then paste it
+          here. The code expires after 10 minutes and can be used once.
+        </p>
+        <form id="link-form" autocomplete="off">
+          <label for="pairing-code">Pairing code</label>
+          <div class="row">
+            <input id="pairing-code" name="pairing-code" placeholder="XXXX-XXXX" maxlength="24" spellcheck="false" />
+            <button type="submit" class="primary" id="link-button">Link device</button>
+          </div>
+        </form>
+        <p class="error" id="link-error" role="alert" hidden></p>
+        <p class="muted small">
+          AvenqioPresence never asks for your Discord password. The companion talks to your local Discord client, so
+          Rich Presence appears only while this app is running.
+        </p>
+        <details class="advanced">
+          <summary>Connection settings</summary>
+          <label for="api-url">Dashboard URL</label>
+          <div class="row">
+            <input id="api-url" spellcheck="false" />
+            <button type="button" class="ghost" id="save-api">Save</button>
+          </div>
+        </details>
+      </section>
+
+      <div id="linked" hidden>
+        <section class="grid two">
+          <article class="card account">
+            <div class="account-row">
+              <img id="avatar" alt="" />
+              <div>
+                <p class="label">Signed in as</p>
+                <p class="account-name" id="account-name">—</p>
+                <p class="muted small" id="account-discord">—</p>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <p class="label">Published right now</p>
+            <p class="active-name" id="active-name">Nothing published</p>
+            <p class="muted small" id="active-meta"></p>
+            <div class="row gap">
+              <button type="button" class="ghost" id="clear">Clear presence</button>
+              <button type="button" class="ghost" id="refresh">Sync now</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2>Companion settings</h2>
+            <label class="toggle"><input type="checkbox" id="opt-autopublish" /> <span>Publish automatically</span></label>
+            <label class="toggle"><input type="checkbox" id="opt-start" /> <span>Start with Windows</span></label>
+            <label class="toggle"><input type="checkbox" id="opt-tray" /> <span>Keep running in the tray when closed</span></label>
+            <label class="toggle"><input type="checkbox" id="opt-updates" /> <span>Check for updates automatically</span></label>
+            <div class="divider"></div>
+            <div class="row gap">
+              <button type="button" class="ghost" id="check-updates">Check for updates</button>
+              <button type="button" class="ghost danger" id="unlink">Unlink device</button>
+            </div>
+            <p class="muted small" id="update-status"></p>
+          </article>
+        </section>
+
+        <section class="grid two lists">
+          <article class="card">
+            <h2>My presences <span class="count" id="presence-count">0</span></h2>
+            <ul class="list" id="presence-list"></ul>
+            <p class="empty" id="presence-empty" hidden>
+              No presences yet. Create one on the dashboard and it appears here within 30 seconds.
+            </p>
+          </article>
+          <article class="card">
+            <h2>Community presets <span class="count" id="preset-count">0</span></h2>
+            <ul class="list" id="preset-list"></ul>
+            <p class="empty" id="preset-empty" hidden>
+              No published preset is available to you. Community presets appear here once a preset manager publishes
+              one.
+            </p>
+          </article>
+        </section>
+
+        <section class="card">
+          <div class="row between">
+            <h2>Activity log</h2>
+            <button type="button" class="ghost small" id="toggle-logs">Show</button>
+          </div>
+          <pre class="logs" id="logs" hidden></pre>
+        </section>
+      </div>
+
+      <p class="error" id="global-error" role="alert" hidden></p>
+    </main>
+
+    <footer>
+      <span>AvenqioPresence · presence is published locally, never by the server</span>
+      <button type="button" class="link" id="quit">Quit</button>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
