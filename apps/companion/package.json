@@ -1,0 +1,25 @@
+{
+  "name": "@avenqio/companion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AvenqioPresence Windows companion — publishes Rich Presence through the local Discord RPC connection.",
+  "main": "dist/main.cjs",
+  "scripts": {
+    "dev": "node scripts/build.mjs --watch",
+    "build": "node scripts/build.mjs",
+    "start": "electron dist/main.cjs",
+    "package": "npm run build && electron-builder --win portable --config electron-builder.yml",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@avenqio/shared": "0.1.0",
+    "@xhayper/discord-rpc": "^1.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.3"
+  }
+}

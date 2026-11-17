@@ -1,53 +1,37 @@
 {
-  "name": "avenqio-qr",
+  "name": "avenqiorepence",
+  "version": "0.1.0",
   "private": true,
-  "version": "1.1.0",
-  "homepage": "https://avenqio-qr.onrender.com",
-  "type": "module",
-  "main": "electron/main.cjs",
+  "description": "AvenqioPresence — Discord Rich Presence management platform for users and communities.",
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "services/*"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "start": "serve -s dist -l tcp://0.0.0.0:${PORT:-10000}",
-    "preview": "vite preview",
+    "dev": "npm run dev --workspace @avenqio/web",
+    "build": "npm run build --workspace @avenqio/shared && npm run build --workspace @avenqio/web",
+    "start": "node scripts/start.mjs",
+    "db:migrate": "tsx scripts/db.ts migrate",
+    "db:seed": "tsx scripts/db.ts seed",
+    "db:reset": "tsx scripts/db.ts reset",
+    "db:policies": "tsx scripts/db.ts policies",
     "test": "vitest run",
-    "desktop": "npm run build && electron-builder --win portable"
-  },
-  "dependencies": {
-    "jspdf": "^4.2.1",
-    "qr-code-styling": "^1.8.4",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "serve": "^14.2.6"
+    "test:watch": "vitest",
+    "test:smoke": "node tests/smoke.mjs",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "bot": "npm run dev --workspace @avenqio/discord-bot",
+    "companion": "npm run dev --workspace @avenqio/companion",
+    "companion:build": "npm run build --workspace @avenqio/companion",
+    "companion:package": "npm run package --workspace @avenqio/companion"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.11",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.6.0",
-    "tailwindcss": "^4.1.11",
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
     "typescript": "^5.8.3",
-    "vite": "^7.0.5",
-    "vitest": "^3.2.4",
-    "electron": "^33.2.1",
-    "electron-builder": "^25.1.8"
+    "vitest": "^3.2.4"
   },
-  "build": {
-    "appId": "com.avenqio.qr",
-    "productName": "AVENQIO QR",
-    "directories": {
-      "output": "release"
-    },
-    "files": [
-      "dist/**/*",
-      "electron/**/*",
-      "build/icon.png",
-      "package.json"
-    ],
-    "win": {
-      "target": ["portable"],
-      "icon": "build/icon.ico",
-      "signAndEditExecutable": false
-    }
+  "engines": {
+    "node": ">=22.6"
   }
 }
